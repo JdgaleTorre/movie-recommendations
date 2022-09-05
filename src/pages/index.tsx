@@ -1,7 +1,10 @@
+import { trpc } from "@/utils/trpc";
 import type { NextPage } from "next";
 import Head from "next/head";
 
 const Home: NextPage = () => {
+  const { data } = trpc.useQuery(["hello", { text: "Jose" }]);
+
   return (
     <div className="h-screen w-screen flex flex-col justify-between items-center relative">
       <Head>
@@ -10,7 +13,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="text-2xl text-center pt-8">Which Movie is Better?</div>
+      <div className="text-2xl text-center pt-8">{data?.greeting}</div>
     </div>
   );
 };
